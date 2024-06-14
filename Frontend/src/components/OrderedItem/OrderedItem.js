@@ -1,7 +1,18 @@
+import { useNavigate } from "react-router-dom";
+
 function OrderedItem(props) {
+  const navigate = useNavigate();
+
+  function handelOrderSummary() {
+    navigate("/orderDetails", { replace: false });
+  }
+
   return (
     <>
-      <div class="flex flex-col space-x-6 border-b border-gray-200 py-6">
+      <div
+        class="flex flex-col space-x-6 border-b border-gray-200 py-6"
+        onClick={handelOrderSummary}
+      >
         <div className="flex flex-row  px-2">
           <img
             src={props.img}

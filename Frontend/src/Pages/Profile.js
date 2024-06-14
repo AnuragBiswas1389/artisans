@@ -9,6 +9,15 @@ function Profile(props) {
   function clickHandler() {
     navigate("/orders", { replace: false });
   }
+  function handleLogin() {
+    navigate("/signin", { replace: false });
+  }
+  function handelLogout() {
+    navigate("/signup", { replace: false });
+  }
+  function handelAdressbook() {
+    navigate("/address", { replace: false });
+  }
 
   return (
     <>
@@ -90,6 +99,26 @@ function Profile(props) {
                 >
                   Order History
                 </button>
+                <div className="flex">
+                  <button
+                    class="block w-full text-green-600 text-sm font-semibold rounded-lg border border-green-600 hover:bg-gray-100 focus:outline-none focus:shadow-outline focus:bg-gray-100 hover:shadow-xs p-3 my-4"
+                    onClick={handleLogin}
+                  >
+                    Log In
+                  </button>
+                  <button
+                    class="block w-full text-green-600 text-sm font-semibold rounded-lg border border-green-600 hover:bg-gray-100 focus:outline-none focus:shadow-outline focus:bg-gray-100 hover:shadow-xs p-3 my-4"
+                    onClick={handelLogout}
+                  >
+                    Log Out
+                  </button>
+                  <button
+                    class="block w-full text-green-600 text-sm font-semibold rounded-lg border border-green-600 hover:bg-gray-100 focus:outline-none focus:shadow-outline focus:bg-gray-100 hover:shadow-xs p-3 my-4"
+                    onClick={handelAdressbook}
+                  >
+                    View Adress Book
+                  </button>
+                </div>
               </div>
               {/* <!-- End of about section --> */}
 
