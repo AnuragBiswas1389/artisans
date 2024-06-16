@@ -1,34 +1,33 @@
 const express = require("express");
 const mongoose = require("mongoose");
-
+const Product = require("./models/product.model.js");
+const productRoute = require("./routes/product.route.js");
 const app = express();
-app.use(express.json());
 
 var mongodb = "mongodb://localhost/mydatabase";
 
-mongoose.Promise = global.Promise;
-mongoose.connect(mongodb);
+// middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
-const db = mongoose.connection;
+// routes
+app.use("/api/products", productRoute);
 
-app.listen(3000, () => {
-  console.log(`Server Started at ${3000}`);
+app.get("/", (req, res) => {
+  res.send("Hello from Node API Server Updated");
 });
 
-
-
-
-db.on("error", (error) => {
-  console.error("MongoDB connection error:", error);
-});
-
-db.on("open", () => {
-  console.log("Connected to MongoDB");
-});
-
-db.on("disconnected", () => {
-  console.log("Disconnected from MongoDB");
-});
+mongoose
+  .connect(mongodb)
+  .then(() => {
+    console.log("Connected to database!");
+    app.listen(3000, () => {
+      console.log("Server is running on port 3000");
+    });
+  })
+  .catch(() => {
+    console.log("Connection failed!");
+  });
 
 //closes the connection on exit
 process.on("SIGINT", () => {
