@@ -74,15 +74,15 @@ function ProductGrid(props) {
               </div>
             ))}
 
-          {productsData.map((item) => {
+          {productsData.slice(0, 8).map((item) => {
             return (
               <GridProd
-                src="/assets/images/component 14.png"
-                title="Get the best product only on skillacart"
-                herf="/product"
+                src={item.image}
+                title={item.name}
                 onSale={item.onSale}
-                rating={item.rating}
+                rating={4}
                 price={item.price}
+                id={item._id}
                 parentClassName={`${
                   item.id == 9 ? "hidden md:block lg:hidden" : " "
                 }`}

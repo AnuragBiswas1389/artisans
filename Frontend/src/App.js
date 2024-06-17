@@ -20,7 +20,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route index element={<Home />} />
-        <Route path="/product" element={<ProdView />} />
+        <Route path="product/:productId" element={<ProdView />} />
         <Route path="/grid" element={<ProductGrid />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/Signup" element={<Signup />} />

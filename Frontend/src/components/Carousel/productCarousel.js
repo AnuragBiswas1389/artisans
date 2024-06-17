@@ -42,7 +42,6 @@ export default function Carousel(props) {
         setCarousel(data);
         setError(false);
         setLoad(true);
-        
       })
       .catch((err) => {
         setError(true);
@@ -104,34 +103,30 @@ export default function Carousel(props) {
         className="mySwiper"
       >
         {content}
-        {carouselData.map((item) => {
-          return (
-            <SwiperSlide>
-              <div
-                className={`w-full ${
-                  props.forProduct
-                    ? " h-80 sm:h-[30rem] "
-                    : "h-[18rem] sm:h-[30rem]"
-                }`}
-              >
-                <Link to={item.href}>
-                  <LazyLoadImage
-                    key={item.id}
-                    src={item.image}
-                    width="100%"
-                    height="100%"
-                    placeholderSrc={item.placeholder}
-                    style={{
-                      borderRadius: borderRadius,
-                      width: "100%",
-                      height: "100%",
-                    }}
-                  />
-                </Link>
-              </div>
-            </SwiperSlide>
-          );
-        })}
+
+        <SwiperSlide>
+          <div
+            className={`w-full ${
+              props.forProduct
+                ? " h-80 sm:h-[30rem] "
+                : "h-[18rem] sm:h-[30rem]"
+            }`}
+          >
+            <Link>
+              <LazyLoadImage
+                key={carouselData.id}
+                src={carouselData.image}
+                width="100%"
+                height="100%"
+                style={{
+                  borderRadius: borderRadius,
+                  width: "100%",
+                  height: "100%",
+                }}
+              />
+            </Link>
+          </div>
+        </SwiperSlide>
       </Swiper>
     </>
   );

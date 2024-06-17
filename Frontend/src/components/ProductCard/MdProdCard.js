@@ -16,10 +16,10 @@ function MdProdCard(props) {
       ${props.border ? "border border-green-600 " : " "}  
       ${props.ParentClassName} ${props.parentClassName}`}
     >
-      <Link to={props.href}>
+      <Link to={`/product/${props.id}`}>
         <div className={`aspect-square overflow-hidden ${dimension}`}>
           <LazyLoadImage
-            src={props.src}
+            src={props.image}
             width="100%"
             height="100%"
             placeholderSrc="/assets/images/DefPlaceholder.svg"

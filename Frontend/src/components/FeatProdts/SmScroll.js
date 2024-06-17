@@ -14,6 +14,7 @@ function SmScroll(props) {
       .then((res) => res.json())
       .then((data) => {
         setProducts(data);
+        console.log(data);
         setLoading(false);
       })
       .catch((err) => {
@@ -29,7 +30,7 @@ function SmScroll(props) {
   }
 
   return (
-    <section className="pb-2 m-0 mb-2 sm:mb-0 sm:h-auto featProdScroll">
+    <section className="pb-2 m-0 mb-2 sm:mb-0 sm:h-auto featProdScroll ">
       <div className="w-full rounded-md">
         <div className="flex flex-row items-baseline justify-between ">
           <h1 className="flex max-w-sm ml-4 text-3xl font-bold text-green-600 sm:mt-2 items-center-center">
@@ -65,11 +66,12 @@ function SmScroll(props) {
               </div>
             ))}
 
-          {productsData.map((item) => {
+          {productsData.slice(0, 6).map((item) => {
             return (
               <MdProdCard
-                src={item.src}
+                image={item.image}
                 alt={item.name}
+                id={item._id}
                 ParentClassName={`
                 ${item.id < 4 ? " " : "sm:hidden"}
                 ${item.id <= 4 && item.id < 5 ? "md:block " : ""}

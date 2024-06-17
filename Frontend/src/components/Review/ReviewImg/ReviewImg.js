@@ -6,7 +6,7 @@ function ReviewImg(props) {
         }`}
       >
         <img
-          src="https://componentland.com/images/JHxMnVrtPMdcNU1s_7g7f.png"
+          src={props.image}
           alt="review image"
         />
       </section>

@@ -1,11 +1,12 @@
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import Rating from "../Rating/starRating/StarRating";
 
 function GridProd(props) {
   return (
-    <Link>
+    <Link to={`/product/${props.id}`}>
       <article
         className={`relative border border-green-600 shadow-md rounded-md mx-auto sm:px-2s
         sm:w-60 w-50 overflow-hidden mb-2 ${props.parentClassName}`}

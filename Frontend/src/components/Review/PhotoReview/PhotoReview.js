@@ -11,10 +11,10 @@ function PhotoReview(props) {
         ></SectionHeader>
         {/* <!-- user uploaded review image section --> */}
         <section class="flex w-full overflow-x-auto space-x-6 noScroll">
-          <ReviewImg forReviewCard="true"></ReviewImg>
-          <ReviewImg forReviewCard="true"></ReviewImg>
-          <ReviewImg forReviewCard="true"></ReviewImg>
-          <ReviewImg forReviewCard="true"></ReviewImg>
+          <ReviewImg forReviewCard="true" image={props.image}></ReviewImg>
+          <ReviewImg forReviewCard="true" image={props.image}></ReviewImg>
+          <ReviewImg forReviewCard="true" image={props.image}></ReviewImg>
+          <ReviewImg forReviewCard="true" image={props.image}></ReviewImg>
         </section>
       </div>
     </section>

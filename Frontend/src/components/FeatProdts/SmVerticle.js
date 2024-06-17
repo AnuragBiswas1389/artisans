@@ -24,7 +24,6 @@ function SmVerticle(props) {
 
   function handelButtonClick() {
     navigate("/grid", { replace: false });
-    console.log("button clicked");
   }
 
   return (
@@ -67,11 +66,12 @@ function SmVerticle(props) {
               </div>
             ))}
 
-          {productsData.map((item) => {
+          {productsData.slice(13, 19).map((item) => {
             return (
               <MdProdCard
-                src={item.src}
+                image={item.image}
                 alt={item.name}
+                id={item._id}
                 ParentClassName={`
                 ${item.id < 4 ? " " : "sm:hidden"}
                 ${item.id <= 4 && item.id < 5 ? "md:block " : ""}
@@ -83,70 +83,6 @@ function SmVerticle(props) {
               ></MdProdCard>
             );
           })}
-
-          {/* <MdProdCard
-            border={false}
-            dimension="h-60 w-40 sm:w-48 ss:w-48"
-            src="/assets/images/Component 14.png"
-          ></MdProdCard>
-
-          <MdProdCard
-            border={false}
-            dimension="h-60 w-40 sm:w-48 ss:w-48"
-            src="/assets/images/Component 14.png"
-          ></MdProdCard>
-
-          <MdProdCard
-            border={false}
-            dimension="h-60 w-40 sm:w-48 ss:w-48"
-            src="/assets/images/Component 14.png"
-          ></MdProdCard> */}
-
-          {/* <!-- hidden for xs screens --> */}
-          {/* <MdProdCard
-            ParentClassName="xs:hidden s:block"
-            border={false}
-            dimension="h-60 w-40 sm:w-48 ss:w-48"
-            src="/assets/images/Component 14.png"
-          ></MdProdCard> */}
-
-          {/* <!-- add more items that will appear in medium screens  --> */}
-          {/* <MdProdCard
-            ParentClassName="hidden lg:block"
-            border={false}
-            dimension="h-60 w-40 sm:w-48 ss:w-48"
-            src="/assets/images/Component 14.png"
-          ></MdProdCard> */}
-
-          {/* <!-- add more items that will appear in large screens  --> */}
-          {/* <MdProdCard
-            ParentClassName="hidden lg:block"
-            border={false}
-            dimension="h-60 w-40 sm:w-48 ss:w-48"
-            src="/assets/images/Component 14.png"
-          ></MdProdCard> */}
-
-          {/* <!-- items for extra lage screens  --> */}
-          {/* <MdProdCard
-            ParentClassName="hidden xl:block "
-            border={false}
-            dimension="h-60 w-40 sm:w-48 ss:w-48"
-            src="/assets/images/Component 14.png"
-          ></MdProdCard> */}
-
-          {/* for extra lage screens */}
-          {/* <MdProdCard
-            ParentClassName="hidden 2xl:block "
-            border={false}
-            dimension="h-60 w-40 sm:w-48 ss:w-48"
-            src="/assets/images/Component 14.png"
-          ></MdProdCard>
-          <MdProdCard
-            ParentClassName="hidden 2xl:block "
-            border={false}
-            dimension="h-60 w-40 sm:w-48 ss:w-48"
-            src="/assets/images/Component 14.png"
-          ></MdProdCard> */}
         </div>
       </div>
     </section>

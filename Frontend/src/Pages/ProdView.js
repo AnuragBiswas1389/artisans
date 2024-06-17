@@ -4,7 +4,7 @@ import CrafterProfile from "../components/CraftersProfile/CrafterProfile";
 import LgCrafterProfile from "../components/CraftersProfile/LgCrafterProfile";
 import PhotoReview from "../components/Review/PhotoReview/PhotoReview";
 import ReviewCard from "../components/Review/ReviewCard/ReviewCard";
-import Carousel from "../components/Carousel/Carousel";
+import Carousel from "../components/Carousel/productCarousel";
 import ProductVariation from "../components/ProductVariation/ProductVariation";
 import BuyBox from "../components/BuyBox/BuyBox";
 import DeliveryServices from "../components/DeliveryServices/DeliveryServices";
@@ -14,7 +14,35 @@ import ProductGrid from "../components/views/ProductGrid/ProductGrid";
 import GridProd from "../components/ProductCard/GridProd";
 import GridHeader from "../components/Header/GridHeader";
 
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+
 function ProdView(props) {
+  const { productId } = useParams();
+  const api = `http://192.168.29.58:8000/api/products/${productId}`;
+
+  const [productsData, setProducts] = useState([]);
+  const [isloading, setLoading] = useState(true);
+
+  console.log(api);
+
+  useEffect(() => {
+    fetch(api)
+      .then((res) => res.json())
+      .then((data) => {
+        setProducts(data);
+        console.log(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <section>
       <Nav></Nav>
@@ -31,7 +59,7 @@ function ProdView(props) {
                       isRounded={true}
                       autoplay={false}
                       forProduct={true}
-                      api={`http://192.168.29.174:8000/api/carousel`}
+                      api={api}
                     ></Carousel>
                   </section>
                   {/* can add product preview section */}
@@ -46,19 +74,20 @@ function ProdView(props) {
                   <span class="text-green-600 ">New</span>
                   {/* product title */}
                   <h1 class="max-w-xl mt-2 mb-4 text-xl font-bold md:text-3xl font-heading ">
-                    Canvus painting with absturct figure and frame || with
-                    varnish
+                    {productsData.name}
                   </h1>
                   {/* offer section */}
                   <div class="text-green-600 text-md">welcome offer</div>
                   {/* price */}
                   <h1 class="max-w-md mb-2 ml-2 text-2xl font-bold ">
-                    Rs. 800
+                    Rs. {productsData.price}
                   </h1>
                   {/* mrp section */}
                   <h3 class="max-w-md mb-4 ml-2 text-md text-neutral-500 ">
                     M.R.P
-                    <p class="inline-block line-through">₹ 1200</p>
+                    <p class="inline-block line-through">
+                      ₹ {productsData.price + 1500}
+                    </p>
                   </h3>
                   {/* authentication certificate section */}
                   <div class="flex flex-row items-center">
@@ -243,15 +272,15 @@ function ProdView(props) {
                 </section>
               </section>
               {/* product variation section */}
-              <ProductVariation></ProductVariation>
+              {/* <ProductVariation></ProductVariation> */}
               {/* buy box */}
               <BuyBox productid={1212}></BuyBox>
               {/* delivery and services section */}
               <DeliveryServices></DeliveryServices>
               {/* crafter profile for larger screen */}
-              <LgCrafterProfile id={45825}></LgCrafterProfile>
+              {/* <LgCrafterProfile id={45825}></LgCrafterProfile> */}
               {/* crafter profile for smaller screen */}
-              <CrafterProfile id={45825}></CrafterProfile>
+              {/* <CrafterProfile id={45825}></CrafterProfile> */}
               {/* description section */}
               <section class="lg:col-span-3 ">
                 <div class="">
@@ -278,30 +307,17 @@ function ProdView(props) {
                   </nav>
                   {/* product description */}
                   <div class="mt-8 flow-root sm:mt-12 pb-8 border-b border-green-600 mb-4">
-                    <h1 class="text-3xl font-bold">Delivered To Your Door</h1>
-                    <p class="mt-4">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Quia accusantium nesciunt fuga.
-                    </p>
-                    <h1 class="mt-8 text-3xl font-bold">
-                      From the Fine Farms of Brazil
-                    </h1>
-                    <p class="mt-4">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Optio numquam enim facere.
-                    </p>
-                    <p class="mt-4">
-                      Amet consectetur adipisicing elit. Optio numquam enim
-                      facere. Lorem ipsum dolor sit amet consectetur,
-                      adipisicing elit. Dolore rerum nostrum eius facere, ad
-                      neque.
-                    </p>
+                    <h1 class="text-3xl font-bold">Product Description</h1>
+                    {productsData.description}
                   </div>
                 </div>
               </section>
               {/* Photo review section */}
               <section>
-                <PhotoReview id={52489}></PhotoReview>
+                <PhotoReview
+                  id={52489}
+                  image={productsData.image}
+                ></PhotoReview>
               </section>
               {/* user rating section */}
               <section className="mt-4">
@@ -311,9 +327,9 @@ function ProdView(props) {
                     inlineButton="True"
                   ></SectionHeader>
                 </div>
-                <ReviewCard rating={3}></ReviewCard>
-                <ReviewCard rating={3}></ReviewCard>
-                <ReviewCard rating={3}></ReviewCard>
+                <ReviewCard rating={3} image={productsData.image}></ReviewCard>
+                {/* <ReviewCard rating={3}></ReviewCard>
+                <ReviewCard rating={3}></ReviewCard> */}
               </section>
             </div>
           </div>
@@ -339,12 +355,12 @@ function ProdView(props) {
             <GridProd Display={true} />
           </div> */}
           {/* Product display grid */}
-          <ProductGrid
+          {/* <ProductGrid
             genericTitle={true}
             text="Get the latest Products"
-            api="http://192.168.29.174:8000/api/gridProducts"
+            api="http://192.168.29.58:8000/api/Products"
             headerVisible={true}
-          ></ProductGrid>
+          ></ProductGrid> */}
         </section>
       </section>
 

@@ -56,14 +56,15 @@ function ProdWithRightImage(props) {
                   </div>
                 </div>
               ))}
-            {productsData.map((item) => {
+            {productsData.slice(5,11).map((item) => {
               return (
                 <MdProdCard
-                  src={item.src}
+                  image={item.image}
                   alt={item.name}
+                  id={item._id}
                   href={item.href}
                   ParentClassName={`
-                    ${item.id == 9 ? "md:hidden lg:hidden xl:block" : " "}
+                    ${item.id == 5 ? "md:hidden lg:hidden xl:block" : " "}
                     ${item.id == 10 ? "lg:hidden xl:block" : " "}
                
                 `}

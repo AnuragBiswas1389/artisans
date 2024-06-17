@@ -91,11 +91,11 @@ function ReviewCard(props) {
         </section>
         {/* <!-- user uploaded review image section --> */}
         <section class="flex pt-1 w-full overflow-x-auto space-x-4 noScroll ">
-          <ReviewImg ></ReviewImg>
-          <ReviewImg ></ReviewImg>
-          <ReviewImg ></ReviewImg>
-          <ReviewImg ></ReviewImg>
-          <ReviewImg ></ReviewImg>
+          <ReviewImg image={props.image}></ReviewImg>
+          <ReviewImg image={props.image}></ReviewImg>
+          <ReviewImg image={props.image}></ReviewImg>
+          <ReviewImg image={props.image}></ReviewImg>
+          <ReviewImg image={props.image}></ReviewImg>
         </section>
       </li>
     </ul>
