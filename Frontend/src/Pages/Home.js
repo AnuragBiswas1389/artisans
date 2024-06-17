@@ -21,19 +21,19 @@ function Home() {
   const [ResultData, setData] = useState([]);
   const [isloading, setLoading] = useState(true);
 
-  const api = "http://localhost:8000/api/home";
-  useEffect(() => {
-    fetch(api)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setData(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
-  }, []);
+  // const api = "http://localhost:8000/api/home";
+  // useEffect(() => {
+  //   fetch(api)
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       console.log(data);
+  //       setData(data);
+  //       setLoading(false);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err.message);
+  //     });
+  // }, []);
 
   return (
     <div>
@@ -70,10 +70,10 @@ function Home() {
         ></SmVerticle>
       </div>
 
-      {/* <ProdWithRightImage
+      <ProdWithRightImage
         title="Trending Products"
         api="http://192.168.29.174:8000/api/products"
-      ></ProdWithRightImage> */}
+      ></ProdWithRightImage>
 
       {/* featured product gird */}
       <section className="pb-2 mt-0 mb-0 bg-white sm:pb-2 lg:pb-4">

@@ -1,7 +1,9 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const Product = require("./models/product.model.js");
+
 const productRoute = require("./routes/product.route.js");
+const categoryRoute = require("./routes/category.route.js");
+
 const app = express();
 
 var mongodb = "mongodb://localhost/mydatabase";
@@ -12,6 +14,7 @@ app.use(express.urlencoded({ extended: false }));
 
 // routes
 app.use("/api/products", productRoute);
+app.use("/api/categories", categoryRoute);
 
 app.get("/", (req, res) => {
   res.send("Hello from Node API Server Updated");
