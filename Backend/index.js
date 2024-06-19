@@ -4,6 +4,7 @@ const cors = require("cors");
 
 const productRoute = require("./routes/product.route.js");
 const categoryRoute = require("./routes/category.route.js");
+const userRoute = require("./routes/user.route.js");
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use(express.urlencoded({ extended: false }));
 // routes
 app.use("/api/products", productRoute);
 app.use("/api/categories", categoryRoute);
+app.use("/api/users",userRoute);
 
 app.get("/", (req, res) => {
   res.send("Hello from Node API Server Updated");

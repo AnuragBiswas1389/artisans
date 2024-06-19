@@ -1,6 +1,12 @@
 import "../../App.css";
+import { useNavigate } from "react-router-dom";
 
 function SectionHeader(props) {
+    const navigate = useNavigate();
+    function handelMoreClick(){
+      navigate("/grid", { replace: false });
+
+    }
   return (
     <section className=" bg-white pb-2 mb-2 gap-2 ml-4  sm:pb-2 lg:pb-2 ">
       <div className="rounded-md w-full">
@@ -10,7 +16,8 @@ function SectionHeader(props) {
           </h1>
           {/* <!-- featured product more button --> */}
           <div className={` flex-col items-end mr-4 mt-0 justify-center`}>
-            <button className="bg-green-600 text-lg w-16 h-8 font-bold rounded-md text-white">
+            <button className="bg-green-600 text-lg w-16 h-8 font-bold rounded-md text-white"
+            onClick={handelMoreClick}>
               more
             </button>
           </div>

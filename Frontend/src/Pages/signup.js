@@ -1,5 +1,45 @@
 import { useState } from "react";
 function Signup() {
+  const [passCorrect, setPassState] = useState(true);
+  const [login, setLoin] = useState(false)
+  const [loginError, setLoginError]= useState(false)
+
+  async function handelSignup(event) {
+    event.preventDefault();
+
+    if (!(event.target.password1.value === event.target.password2.value)) {
+      console.log("password not match");
+      setPassState(false);
+    }
+
+    var jsonData = {
+      name: event.target.name.value,
+      phone: event.target.phone.value,
+      Email: event.target.email.value,
+    };
+
+    console.log(jsonData);
+
+    try {
+      const response = await fetch("http://localhost:8000/api/users", {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: JSON.stringify(jsonData), // body data type must match "Content-Type" header
+      });
+
+      const result = await response.json();
+      console.log("Success:", result);
+      setLoin(true)
+    } catch (error) {
+      console.log("error: ", error);
+      setLoginError(true)
+    }
+  }
+
   return (
     <>
       <div class="bg-gray-100 flex items-center justify-center h-screen">
@@ -25,7 +65,7 @@ function Signup() {
           <p class="text-gray-600 text-center mb-6">
             Enter your details to register.
           </p>
-          <form>
+          <form onSubmit={handelSignup}>
             <div class="mb-4">
               <label
                 for="fullName"
@@ -38,6 +78,7 @@ function Signup() {
                 id="fullName"
                 class="form-input w-full px-4 py-2 border  border-green-600 rounded-lg c text-gray-700 focus:ring-green-600"
                 required
+                name="name"
                 placeholder="Your name"
               />
             </div>
@@ -51,6 +92,7 @@ function Signup() {
               <input
                 type="email"
                 id="email"
+                name="email"
                 class="form-input w-full px-4 py-2 border  border-green-600 rounded-lg text-gray-700 focus:ring-green-600"
                 required
                 placeholder="Your email"
@@ -66,6 +108,7 @@ function Signup() {
               <input
                 type="number"
                 id="phoneNumber"
+                name="phone"
                 class="form-input w-full px-4 py-2 border  border-green-600 rounded-lg text-gray-700 focus:ring-green-600"
                 required
                 placeholder="Your phone Number"
@@ -79,9 +122,13 @@ function Signup() {
                 Password *
               </label>
               <input
-                type="password1"
-                id="password"
-                class="form-input w-full px-4 py-2 border  border-green-600 rounded-lg text-gray-700 focus:ring-green-600"
+                type="password"
+                id="password1"
+                name="password1"
+                className={`form-input w-full px-4 py-2 border  rounded-lg text-gray-700 focus:ring-green-600
+                  ${passCorrect && "border-green-600"} 
+                  ${!passCorrect && "border-rose-700"}
+                  `}
                 required
                 placeholder="Password"
               />
@@ -92,15 +139,23 @@ function Signup() {
                 Password *
               </label>
               <input
-                type="password1"
-                id="password"
-                class="form-input w-full px-4 py-2 border  border-green-600 rounded-lg text-gray-700 focus:ring-green-600"
+                type="password"
+                id="password2"
+                name="password2"
+                className={`form-input w-full px-4 py-2 border  rounded-lg text-gray-700 focus:ring-green-600
+                  ${passCorrect && "border-green-600"} 
+                  ${!passCorrect && "border-rose-700"}
+                
+                  `}
                 required
                 placeholder="Repeat password"
               />
               <p class="text-gray-600 text-xs mt-1">
                 Must contain 1 uppercase letter, 1 number, min. 8 characters.
               </p>
+              {!passCorrect && (
+                <p className="text-rose-700">Password Do not Match</p>
+              )}
             </div>
             {/* <!-- remove the a tag with app.ate actn --> */}
             <a href="./signin.html">

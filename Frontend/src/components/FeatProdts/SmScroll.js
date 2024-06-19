@@ -72,12 +72,12 @@ function SmScroll(props) {
                 image={item.image}
                 alt={item.name}
                 id={item._id}
-                ParentClassName={`
-                ${item.id < 4 ? " " : "sm:hidden"}
-                ${item.id <= 4 && item.id < 5 ? "md:block " : ""}
-                ${item.id <= 6 && item.id < 7 ? "  lg:block " : ""}
-                ${item.id <= 7 ? "" : " 2xl:block "}
-                `}
+                // ParentClassName={`
+                // ${item.id < 4 ? " " : "sm:hidden"}
+                // ${item.id <= 4 && item.id < 5 ? "md:block " : ""}
+                // ${item.id <= 6 && item.id < 7 ? "  lg:block " : ""}
+                // ${item.id <= 7 ? "" : " 2xl:block "}
+                // `}
                 dimension="h-60 w-40 sm:w-48 ss:w-48 mx-1"
               ></MdProdCard>
             );
