@@ -1,7 +1,12 @@
-function AddAdressBook(){
-    return (
-      <>
-        <div class=" shadow-xl flex flex-col h-96 items-center bg-clip-border rounded-xl bg-white text-gray-700 shadow-md z-10 translate-y-0">
+import { Link } from "react-router-dom";
+
+function AddAdressBook() {
+
+
+  return (
+    <>
+      <div class=" shadow-xl flex flex-col h-96 items-center bg-clip-border rounded-xl bg-white text-gray-700 shadow-md z-10 translate-y-0">
+        <Link to={`/newAddress`}>
           <div class="p-6 text-center">
             <h5 class=" tracking-normal font-sans  text-2xl font-bold leading-snug text-green-500 flex justify-center mt-2 mb-2">
               Add a new Adress
@@ -22,9 +27,10 @@ function AddAdressBook(){
               </g>
             </svg>
           </div>
-        </div>
-      </>
-    );
+        </Link>
+      </div>
+    </>
+  );
 }
 
 export default AddAdressBook;

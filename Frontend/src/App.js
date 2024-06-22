@@ -27,7 +27,7 @@ function App() {
         <Route path="/addressView" element={<AddressView />}></Route>
         <Route path="/Signup" element={<Signup />} />
         <Route path="/Signin" element={<Signin />} />
-        <Route path="/address" element={<Address />} />
+        <Route path="/newaddress" element={<Address />} />
         <Route path="/profile" element={<Profile></Profile>} />
         <Route path="/ordersummary" element={<OrderSummary></OrderSummary>} />
         <Route path="/OrderDetails" element={<OrderDetails></OrderDetails>} />

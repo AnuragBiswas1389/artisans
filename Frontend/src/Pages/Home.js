@@ -31,7 +31,7 @@ function Home() {
       <Carousel
         isRounded={false}
         autoPlay={true}
-        api={`http://192.168.29.57:8000/api/carousel`}
+        api={`http://192.168.29.57:8000/api/carousels`}
       ></Carousel>
 
       <SmCateContainer
@@ -77,7 +77,7 @@ function Home() {
       <OfferSlider
         autoPlay={true}
         effect="slide"
-        api={`http://192.168.29.57:8000/api/carousel`}
+        api={`http://192.168.29.57:8000/api/carousels`}
       ></OfferSlider>
 
       {/* <ProdWithLeftImage

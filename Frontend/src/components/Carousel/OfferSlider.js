@@ -27,7 +27,7 @@ export default function OfferSlider(props) {
 
   if (props.autoPlay) {
     config = {
-      delay: 4300,
+      delay: 6300,
       disableOnInteraction: false,
     };
   } else {
@@ -88,7 +88,6 @@ export default function OfferSlider(props) {
   return (
     <>
       <Swiper
-        
         spaceBetween={50}
         centeredSlides={true}
         autoplay={config}
@@ -110,7 +109,7 @@ export default function OfferSlider(props) {
                 <Link to={item.href}>
                   <LazyLoadImage
                     key={item.id}
-                    src={item.src}
+                    src={item.image}
                     width="100%"
                     height="100%"
                     placeholderSrc={item.placeholder}

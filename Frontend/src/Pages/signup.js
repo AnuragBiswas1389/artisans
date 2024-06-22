@@ -20,14 +20,15 @@ function Signup() {
     var jsonData = {
       name: event.target.name.value,
       phone: event.target.phone.value,
-      Email: event.target.email.value,
+      email: event.target.email.value,
+      password: event.target.password1.value,
     };
 
     console.log(jsonData);
 
     try {
       setProgress(true);
-      const response = await fetch("http://localhosdt:8000/api/users", {
+      const response = await fetch("http://localhost:8000/api/users", {
         method: "POST",
         mode: "cors",
         headers: {

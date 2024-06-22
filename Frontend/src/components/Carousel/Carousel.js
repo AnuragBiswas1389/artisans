@@ -42,7 +42,6 @@ export default function Carousel(props) {
         setCarousel(data);
         setError(false);
         setLoad(true);
-        
       })
       .catch((err) => {
         setError(true);
@@ -120,7 +119,7 @@ export default function Carousel(props) {
                     src={item.image}
                     width="100%"
                     height="100%"
-                    placeholderSrc={item.placeholder}
+                    placeholderSrc={""}
                     style={{
                       borderRadius: borderRadius,
                       width: "100%",
