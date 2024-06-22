@@ -44,7 +44,7 @@ function LgCateContainer(props) {
           return (
             <LgCateItem
               name={item.name}
-              src={item.src}
+              src={item.image}
               id={item.id}
               href={item.href}
               key={item.id}

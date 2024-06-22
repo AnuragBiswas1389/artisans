@@ -19,7 +19,7 @@ import { useParams } from "react-router-dom";
 
 function ProdView(props) {
   const { productId } = useParams();
-  const api = `http://192.168.29.58:8000/api/products/${productId}`;
+  const api = `http://192.168.29.57:8000/api/products/${productId}`;
 
   const [productsData, setProducts] = useState([]);
   const [isloading, setLoading] = useState(true);

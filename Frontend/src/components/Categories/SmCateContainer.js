@@ -10,11 +10,12 @@ function SmCateContainer(props) {
   const [isloading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://192.168.29.174:8000/api/categories")
+    fetch(props.api)
       .then((res) => res.json())
       .then((data) => {
         setCategory(data);
         setLoading(false);
+        console.log(data);
       })
       .catch((err) => {
         console.log(err.message);
@@ -69,7 +70,7 @@ function SmCateContainer(props) {
                 <MdProdCard
                   border={false}
                   dimension={"h-28 w-28"}
-                  src={item.src}
+                  image={item.image}
                   href={item.href}
                   isError={false}
                   ParentClassName={`${

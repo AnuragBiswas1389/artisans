@@ -12,6 +12,7 @@ import Profile from "./Pages/Profile";
 import OrderSummary from "./Pages/OrderSummary";
 import OrderDetails from "./Pages/OrderDetails";
 import Orders from "./Pages/Orders";
+import AddressView from "./Pages/AddressView";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -23,6 +24,7 @@ function App() {
         <Route path="product/:productId" element={<ProdView />} />
         <Route path="/grid" element={<ProductGrid />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/addressView" element={<AddressView />}></Route>
         <Route path="/Signup" element={<Signup />} />
         <Route path="/Signin" element={<Signin />} />
         <Route path="/address" element={<Address />} />

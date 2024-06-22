@@ -1,12 +1,17 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import loginModal from "../components/Modal/loginModal";
+
 function Signup() {
   const [passCorrect, setPassState] = useState(true);
-  const [login, setLoin] = useState(false)
-  const [loginError, setLoginError]= useState(false)
+  const [login, setLoin] = useState(false);
+  const [loginError, setLoginError] = useState(false);
+  const [progress, setProgress] = useState(false);
+  const navigate = useNavigate();
 
   async function handelSignup(event) {
     event.preventDefault();
-
+    setLoginError(false);
     if (!(event.target.password1.value === event.target.password2.value)) {
       console.log("password not match");
       setPassState(false);
@@ -21,7 +26,8 @@ function Signup() {
     console.log(jsonData);
 
     try {
-      const response = await fetch("http://localhost:8000/api/users", {
+      setProgress(true);
+      const response = await fetch("http://localhosdt:8000/api/users", {
         method: "POST",
         mode: "cors",
         headers: {
@@ -33,16 +39,28 @@ function Signup() {
 
       const result = await response.json();
       console.log("Success:", result);
-      setLoin(true)
+      navigate("/");
+      setLoin(true);
     } catch (error) {
       console.log("error: ", error);
-      setLoginError(true)
+      setLoginError(true);
+      setProgress(false);
     }
   }
 
   return (
     <>
-      <div class="bg-gray-100 flex items-center justify-center h-screen">
+      {progress && (
+        <div className="z-10 w-100 h-100 bg-green-600 p-2 text-white font-bold">
+          Loging You In !
+        </div>
+      )}
+      {loginError && (
+        <div className="z-10 w-100 h-100 bg-green-600 p-2 text-white font-bold bg-blend-normal">
+          There was an Error, Please Check Your Password !
+        </div>
+      )}
+      <div className={`bg-gray-100 flex items-center justify-center h-screen `}>
         <div class="bg-white p-8 rounded-lg shadow-lg max-w-sm w-full">
           <div class="flex justify-center mb-6">
             <span class="inline-block bg-gray-200 rounded-full p-3">
@@ -158,14 +176,14 @@ function Signup() {
               )}
             </div>
             {/* <!-- remove the a tag with app.ate actn --> */}
-            <a href="./signin.html">
-              <button
-                type="submit"
-                class="w-full bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-opacity-50"
-              >
-                Register
-              </button>
-            </a>
+
+            <button
+              type="submit"
+              class="w-full bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-opacity-50"
+            >
+              Register
+            </button>
+
             <p class="text-gray-600 text-xs text-center mt-4">
               By clicking Register, you agree to accept skillacart's
               <a href="#" class="text-green-600 hover:underline">

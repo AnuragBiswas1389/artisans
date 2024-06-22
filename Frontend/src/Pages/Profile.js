@@ -16,7 +16,7 @@ function Profile(props) {
     navigate("/signup", { replace: false });
   }
   function handelAdressbook() {
-    navigate("/address", { replace: false });
+    navigate("/addressview", { replace: false });
   }
 
   return (
