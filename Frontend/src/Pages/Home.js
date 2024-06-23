@@ -77,7 +77,7 @@ function Home() {
       <OfferSlider
         autoPlay={true}
         effect="slide"
-        api={`http://192.168.29.57:8000/api/carousels`}
+        api={`http://192.168.29.57:8000/api/banners`}
       ></OfferSlider>
 
       {/* <ProdWithLeftImage

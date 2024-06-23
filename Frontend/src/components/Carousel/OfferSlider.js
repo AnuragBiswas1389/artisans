@@ -104,22 +104,25 @@ export default function OfferSlider(props) {
             <SwiperSlide>
               <div
                 className={`w-full pb-2`}
-                style={{ height: "30rem", width: "95%" }}
+                style={{ height: "35rem", width: "95%" }}
               >
                 <Link to={item.href}>
-                  <LazyLoadImage
-                    key={item.id}
-                    src={item.image}
-                    width="100%"
-                    height="100%"
-                    placeholderSrc={item.placeholder}
-                    style={{
-                      borderRadius: "0.28rem",
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
-                    }}
-                  />
+                  <picture>
+                    <source media="(min-width:650px)" srcset={item.ImageLg} />
+                    <source media="(min-width:465px)" srcset={item.ImageMd} />
+                    <img
+                      src={item.image}
+                      alt="Flowers"
+                      style={{
+                        height: "100%",
+                        padding: "0px",
+                        width: "100%",
+                        objectFit: "cover",
+
+                        borderRadius: "18px",
+                      }}
+                    />
+                  </picture>
                 </Link>
               </div>
             </SwiperSlide>

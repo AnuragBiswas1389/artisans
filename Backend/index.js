@@ -6,6 +6,7 @@ const productRoute = require("./routes/product.route.js");
 const categoryRoute = require("./routes/category.route.js");
 const userRoute = require("./routes/user.route.js");
 const carouselRoute = require("./routes/carousel.route.js");
+const bannerRoute = require("./routes/banner.route.js")
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use("/api/products", productRoute);
 app.use("/api/categories", categoryRoute);
 app.use("/api/users", userRoute);
 app.use("/api/carousels", carouselRoute),
+app.use("/api/banners", bannerRoute),
   app.get("/", (req, res) => {
     res.send("Hello from Node API Server Updated");
   });

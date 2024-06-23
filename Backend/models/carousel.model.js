@@ -8,6 +8,14 @@ const CarouselSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  imageLg: {
+    type: String,
+    required: true,
+  },
+  imageMd: {
+    type: String,
+    required: true,
+  },
   url: {
     type: String,
   },
