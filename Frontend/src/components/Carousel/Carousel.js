@@ -108,7 +108,29 @@ export default function Carousel(props) {
           return (
             <SwiperSlide>
               <div
-                className={`w-full ${
+                className={`w-full hidden md:block ${
+                  props.forProduct
+                    ? " h-80 sm:h-[30rem] "
+                    : "h-[18rem] sm:h-[30rem]"
+                }`}
+              >
+                <Link to={item.href}>
+                  <LazyLoadImage
+                    key={item.id}
+                    src={item.imageLg}
+                    width="100%"
+                    height="100%"
+                    placeholderSrc={""}
+                    style={{
+                      borderRadius: borderRadius,
+                      width: "100%",
+                      height: "100%",
+                    }}
+                  />
+                </Link>
+              </div>
+              <div
+                className={`w-full block md:hidden ${
                   props.forProduct
                     ? " h-80 sm:h-[30rem] "
                     : "h-[18rem] sm:h-[30rem]"
