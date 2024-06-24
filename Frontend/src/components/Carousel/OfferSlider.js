@@ -41,6 +41,7 @@ export default function OfferSlider(props) {
         setCarousel(data);
         setError(false);
         setLoad(true);
+        console.log(data);
       })
       .catch((err) => {
         setError(true);
@@ -103,26 +104,41 @@ export default function OfferSlider(props) {
           return (
             <SwiperSlide>
               <div
-                className={`w-full pb-2`}
+                className={`w-full pb-2 block md:hidden`}
                 style={{ height: "35rem", width: "95%" }}
               >
                 <Link to={item.href}>
-                  <picture>
-                    <source media="(min-width:650px)" srcset={item.ImageLg} />
-                    <source media="(min-width:465px)" srcset={item.ImageMd} />
-                    <img
-                      src={item.image}
-                      alt="Flowers"
-                      style={{
-                        height: "100%",
-                        padding: "0px",
-                        width: "100%",
-                        objectFit: "cover",
+                  <img
+                    src={item.image}
+                    alt="Flowers"
+                    style={{
+                      height: "100%",
+                      padding: "0px",
+                      width: "100%",
+                      objectFit: "cover",
 
-                        borderRadius: "18px",
-                      }}
-                    />
-                  </picture>
+                      borderRadius: "18px",
+                    }}
+                  />
+                </Link>
+              </div>
+              <div
+                className={`w-full pb-2 hidden md:block`}
+                style={{ height: "35rem", width: "95%" }}
+              >
+                <Link to={item.href}>
+                  <img
+                    src={item.imageLg}
+                    alt="Flowers"
+                    style={{
+                      height: "100%",
+                      padding: "0px",
+                      width: "100%",
+                      objectFit: "cover",
+
+                      borderRadius: "18px",
+                    }}
+                  />
                 </Link>
               </div>
             </SwiperSlide>

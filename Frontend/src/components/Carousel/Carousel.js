@@ -61,7 +61,7 @@ export default function Carousel(props) {
           borderRadius: borderRadius,
           width: "100%",
           height: "100%",
-          objectFit: "cover",
+          objectFit: "contain",
         }}
       />
     </div>
