@@ -2,18 +2,22 @@ import { Link } from "react-router-dom";
 
 function LgCateItem(props) {
   return (
-    <article className="relative m-auto w-28 h-28" key={props.id}>
+    <article className="relative m-0 bg-green-600" key={props.id}>
       <Link to={props.href}>
-        <div className="overflow-hidden hidden">
+        <div className="overflow-hidden w-h-full h-full">
           {/* <!-- product image here-- --> */}
-          <img className=" object-cover" src={props.src} alt={props.alt} />
+          <img
+            className=" object-contain w-h-full h-full"
+            src={props.image}
+            alt={props.alt}
+          />
         </div>
-        <div className="">
-          {/* <!-- product title here --> */}
+        {/* <div className="">
+         
           <h3 className=" from-neutral-600 text-base text-center">
             {props.name}
           </h3>
-        </div>
+        </div> */}
       </Link>
     </article>
   );

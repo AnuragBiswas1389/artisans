@@ -120,7 +120,7 @@ export default function Carousel(props) {
                     src={item.imageLg}
                     width="100%"
                     height="100%"
-                    placeholderSrc={""}
+                    placeholderSrc={"/assets/images/DefPlaceholder.svg"}
                     style={{
                       borderRadius: borderRadius,
                       width: "100%",
@@ -142,11 +142,12 @@ export default function Carousel(props) {
                     src={item.image}
                     width="100%"
                     height="100%"
-                    placeholderSrc={""}
+                    placeholderSrc={"/assets/images/DefPlaceholder.svg"}
                     style={{
                       borderRadius: borderRadius,
                       width: "100%",
                       height: "100%",
+                      padding: "0px",
                     }}
                   />
                 </Link>

@@ -23,7 +23,7 @@ function LgCateContainer(props) {
   }, []);
 
   return (
-    <section className="hidden sm:block flex-row mb-2">
+    <section className="hidden sm:block flex-row pb-2 pr-2 pl-2">
       <div className="mt-0 flex flex-row overflow-hidden gap-2 items-center ">
         {isloading &&
           Array.from({ length: 9 }, (_, i) => (
@@ -44,7 +44,7 @@ function LgCateContainer(props) {
           return (
             <LgCateItem
               name={item.name}
-              src={item.image}
+              image={item.image}
               id={item.id}
               href={item.href}
               key={item.id}

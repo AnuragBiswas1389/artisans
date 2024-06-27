@@ -11,7 +11,7 @@ function ProductGrid(props) {
   const [productsData, setProducts] = useState([]);
   const [isloading, setLoading] = useState(true);
 
-  const api = "http://192.168.29.58:8000/api/products";
+  const api = "http://localhost:8000/api/products";
 
   useEffect(() => {
     fetch(api)
@@ -26,9 +26,7 @@ function ProductGrid(props) {
       });
   }, []);
 
-  function clickHandler(){
-    
-  }
+  function clickHandler() {}
 
   return (
     <section>

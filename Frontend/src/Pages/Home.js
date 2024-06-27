@@ -24,23 +24,23 @@ function Home() {
   return (
     <div>
       <Nav></Nav>
-      {/* <LgCateContainer
-        api={`http://192.168.29.57:8000/api/categories`}
-      ></LgCateContainer> */}
+      <LgCateContainer
+        api={`http://localhost:8000/api/categories`}
+      ></LgCateContainer>
 
       <Carousel
         isRounded={false}
         autoPlay={true}
-        api={`http://192.168.29.57:8000/api/carousels`}
+        api={`http://localhost:8000/api/carousels`}
       ></Carousel>
 
       <SmCateContainer
-        api={`http://192.168.29.57:8000/api/categories`}
+        api={`http://localhost:8000/api/categories`}
       ></SmCateContainer>
 
       <SmScroll
         title="New Products"
-        api={`http://192.168.29.57:8000/api/products`}
+        api={`http://localhost:8000/api/products`}
       ></SmScroll>
 
       <PromoImg
@@ -50,26 +50,26 @@ function Home() {
 
       {/* <SmVerticle
         title="Featured Products"
-        api={`http://192.168.29.57:8000/api/products`}
+        api={`http://localhost:8000/api/products`}
       ></SmVerticle> */}
 
       <div class="sm:hidden">
         <SmVerticle
           title="New Arrivals"
-          api="http://192.168.29.57:8000/api/products"
+          api="http://localhost:8000/api/products"
         ></SmVerticle>
       </div>
 
       {/* <ProdWithRightImage
         title="Trending Products"
-        api="http://192.168.29.57:8000/api/products"
+        api="http://localhost:8000/api/products"
       ></ProdWithRightImage> */}
 
       {/* featured product gird */}
       <section className="pb-2 mt-0 mb-0 bg-white sm:pb-2 lg:pb-4">
         <SectionHeader title="Trending Now"></SectionHeader>
         <ProductGrid
-          api="http://192.168.29.57:8000/api/products"
+          api="http://localhost:8000/api/products"
           headerVisible={false}
         ></ProductGrid>
       </section>
@@ -77,19 +77,19 @@ function Home() {
       <OfferSlider
         autoPlay={true}
         effect="slide"
-        api={`http://192.168.29.57:8000/api/banners`}
+        api={`http://localhost:8000/api/banners`}
       ></OfferSlider>
 
       {/* <ProdWithLeftImage
         title="The Best Products"
-        api="http://192.168.29.57:8000/api/products"
+        api="http://localhost:8000/api/products"
       ></ProdWithLeftImage> */}
 
       {/* Product display grid */}
       <ProductGrid
         genericTitle={true}
         text="Get the latest Products"
-        api="http://192.168.29.57:8000/api/products"
+        api="http://localhost:8000/api/products"
         headerVisible={true}
       ></ProductGrid>
 
