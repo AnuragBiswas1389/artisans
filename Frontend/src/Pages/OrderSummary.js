@@ -1,17 +1,41 @@
 import Footer from "../components/Footer/Footer";
 import Nav from "../components/Nav/Nav";
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+import ErrorAlert from "../components/Alerts/ErrorAlert";
 
 function OrderSummary() {
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+  const [getData, setData] = useState([]);
+
   const navigate = useNavigate();
 
   function homeNavigateHandler() {
     navigate("/", { replace: false });
   }
+
+  useEffect(() => {
+    setError(false);
+    fetch("http://192.168.29.57:8000/api/categories")
+      .then((res) => res.json())
+      .then((data) => {
+        setData(data);
+        setLoading(false);
+        setError(false);
+      })
+      .catch((error) => {
+        setError(true);
+      });
+  }, []);
   return (
     <section>
       <Nav></Nav>
-      <section class="flex items-center py-2 ">
+      {error && <ErrorAlert />}
+      <section class="flex items-center py-2">
         <div class="justify-center flex-1 max-w-6xl px-2 py-4 md:mx-auto bg-white mx-2 rounded-md md:py-10 md:px-10">
           <div>
             <div>
@@ -26,20 +50,83 @@ function OrderSummary() {
             <div class="flex border-b border-gray-200   items-stretch justify-start w-full h-full px-4 mb-8 md:flex-row xl:flex-col md:space-x-6 lg:space-x-8 xl:space-x-0">
               <div class="flex items-start justify-start flex-shrink-0">
                 <div class="flex items-center justify-center w-full pb-6 space-x-4 md:justify-start">
-                  <img
-                    src="/assets/icons/profileIcon.png"
-                    class="object-cover w-16 h-16 rounded-md"
-                    alt="avatar"
-                  ></img>
+                  {!loading && (
+                    <img
+                      src="/assets/icons/profileIcon.png"
+                      class="object-cover w-16 h-16 rounded-md"
+                      alt="avatar"
+                    ></img>
+                  )}
 
                   <div class="flex flex-col items-start justify-start space-y-2">
-                    <p class="text-lg font-semibold leading-4 text-left text-gray-800">
-                      Rahul Sharma
-                    </p>
+                    {!loading && (
+                      <p class="text-lg font-semibold leading-4 text-left text-gray-800">
+                        Rahul Sharma
+                      </p>
+                    )}
 
-                    <p class="text-sm leading-4 cursor-pointer">
-                      rahul@gmail.com
-                    </p>
+                    {!loading && (
+                      <p class="text-sm leading-4 cursor-pointer">
+                        rahul@gmail.com
+                      </p>
+                    )}
+
+                    {loading && (
+                      <div className={` flex rounded-md `}>
+                        <div
+                          className={`rounded-full overflow-hidden h-28 w-28 `}
+                        >
+                          <Skeleton
+                            width={"100%"}
+                            height={"100%"}
+                            baseColor="rgb(229 231 235)"
+                            highlightColor="rgb(209 213 219)"
+                          ></Skeleton>
+                        </div>
+                        <div className="flex flex-col">
+                          <div className="w-52 h-4 pl-4 ">
+                            <Skeleton
+                              width={"100%"}
+                              height={"100%"}
+                              baseColor="rgb(229 231 235)"
+                              highlightColor="rgb(209 213 219)"
+                            ></Skeleton>
+                          </div>
+                          <div className="w-52 h-4 pl-4 pt-4">
+                            <Skeleton
+                              width={"100%"}
+                              height={"100%"}
+                              baseColor="rgb(229 231 235)"
+                              highlightColor="rgb(209 213 219)"
+                            ></Skeleton>
+                          </div>
+                          <div className="w-52 h-4 pl-4 ">
+                            <Skeleton
+                              width={"100%"}
+                              height={"100%"}
+                              baseColor="rgb(229 231 235)"
+                              highlightColor="rgb(209 213 219)"
+                            ></Skeleton>
+                          </div>
+                          <div className="w-36 h-4 pl-4 pt-2 ">
+                            <Skeleton
+                              width={"100%"}
+                              height={"100%"}
+                              baseColor="rgb(229 231 235)"
+                              highlightColor="rgb(209 213 219)"
+                            ></Skeleton>
+                          </div>
+                          <div className="w-20 h-4 pl-4 pt-2 ">
+                            <Skeleton
+                              width={"100%"}
+                              height={"100%"}
+                              baseColor="rgb(229 231 235)"
+                              highlightColor="rgb(209 213 219)"
+                            ></Skeleton>
+                          </div>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
@@ -51,18 +138,41 @@ function OrderSummary() {
                   <p class="mb-2 text-sm leading-5 text-gray-600">
                     Order Number:
                   </p>
-
-                  <p class="text-base font-semibold leading-4 text-gray-800">
-                    029837614267
-                  </p>
+                  {!loading && (
+                    <p class="text-base font-semibold leading-4 text-gray-800">
+                      029837614267
+                    </p>
+                  )}
+                  {loading && (
+                    <div className="w-36 h-5 ">
+                      <Skeleton
+                        width={"100%"}
+                        height={"100%"}
+                        baseColor="rgb(229 231 235)"
+                        highlightColor="rgb(209 213 219)"
+                      ></Skeleton>
+                    </div>
+                  )}
                 </div>
 
                 <div class="w-full px-4 mb-4 md:w-1/4">
                   <p class="mb-2 text-sm leading-5 text-gray-600">Date:</p>
+                  {!loading && (
+                    <p class="text-base font-semibold leading-4 text-gray-800">
+                      March 18, 2022
+                    </p>
+                  )}
 
-                  <p class="text-base font-semibold leading-4 text-gray-800">
-                    March 18, 2022
-                  </p>
+                  {loading && (
+                    <div className="w-36 h-5 ">
+                      <Skeleton
+                        width={"100%"}
+                        height={"100%"}
+                        baseColor="rgb(229 231 235)"
+                        highlightColor="rgb(209 213 219)"
+                      ></Skeleton>
+                    </div>
+                  )}
                 </div>
               </div>
 
@@ -72,9 +182,22 @@ function OrderSummary() {
                     Total:
                   </p>
 
-                  <p class="text-base font-semibold leading-4 text-green-600">
-                    Rs.700
-                  </p>
+                  {!loading && (
+                    <p class="text-base font-semibold leading-4 text-green-600">
+                      Rs.700
+                    </p>
+                  )}
+
+                  {loading && (
+                    <div className="w-36 h-5 ">
+                      <Skeleton
+                        width={"100%"}
+                        height={"100%"}
+                        baseColor="rgb(229 231 235)"
+                        highlightColor="rgb(209 213 219)"
+                      ></Skeleton>
+                    </div>
+                  )}
                 </div>
 
                 <div class="w-full px-4 mb-4 md:w-1/4">
@@ -82,9 +205,22 @@ function OrderSummary() {
                     Payment Method:
                   </p>
 
-                  <p class="text-base font-semibold leading-4 text-gray-800">
-                    Cash on delivery
-                  </p>
+                  {!loading && (
+                    <p class="text-base font-semibold leading-4 text-gray-800">
+                      Cash on delivery
+                    </p>
+                  )}
+
+                  {loading && (
+                    <div className="w-36 h-5 ">
+                      <Skeleton
+                        width={"100%"}
+                        height={"100%"}
+                        baseColor="rgb(229 231 235)"
+                        highlightColor="rgb(209 213 219)"
+                      ></Skeleton>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -95,35 +231,98 @@ function OrderSummary() {
                   <h2 class="mb-2 text-xl font-semibold text-gray-700">
                     Order details
                   </h2>
+                  {!loading && (
+                    <div class="flex flex-col items-center justify-center w-full pb-4 space-y-4 border-b border-gray-200">
+                      <div class="flex justify-between w-full">
+                        <p class="text-base leading-4 text-gray-800">
+                          Subtotal
+                        </p>
 
-                  <div class="flex flex-col items-center justify-center w-full pb-4 space-y-4 border-b border-gray-200">
-                    <div class="flex justify-between w-full">
-                      <p class="text-base leading-4 text-gray-800">Subtotal</p>
+                        <p class="text-base leading-4 text-gray-600">Rs.1000</p>
+                      </div>
 
-                      <p class="text-base leading-4 text-gray-600">Rs.1000</p>
+                      <div class="flex items-center justify-between w-full">
+                        <p class="text-base leading-4 text-gray-800">
+                          Discount
+                        </p>
+
+                        <p class="text-base leading-4 text-gray-600">10%</p>
+                      </div>
+
+                      <div class="flex items-center justify-between w-full">
+                        <p class="text-base leading-4 text-gray-800">
+                          Shipping
+                        </p>
+
+                        <p class="text-base leading-4 text-gray-600">Rs.100</p>
+                      </div>
                     </div>
-
-                    <div class="flex items-center justify-between w-full">
-                      <p class="text-base leading-4 text-gray-800">Discount</p>
-
-                      <p class="text-base leading-4 text-gray-600">10%</p>
+                  )}
+                  {loading && (
+                    <div className="flex flex-col">
+                      <div className="w-68 h-4 pl-4 ">
+                        <Skeleton
+                          width={"100%"}
+                          height={"100%"}
+                          baseColor="rgb(229 231 235)"
+                          highlightColor="rgb(209 213 219)"
+                        ></Skeleton>
+                      </div>
+                      <div className="w-68 h-4 pl-4 pt-4">
+                        <Skeleton
+                          width={"100%"}
+                          height={"100%"}
+                          baseColor="rgb(229 231 235)"
+                          highlightColor="rgb(209 213 219)"
+                        ></Skeleton>
+                      </div>
+                      <div className="w-[85%] h-4 pl-4 ">
+                        <Skeleton
+                          width={"100%"}
+                          height={"100%"}
+                          baseColor="rgb(229 231 235)"
+                          highlightColor="rgb(209 213 219)"
+                        ></Skeleton>
+                      </div>
+                      <div className="w-[75%] h-3 pl-4 mt-4">
+                        <Skeleton
+                          width={"100%"}
+                          height={"100%"}
+                          baseColor="rgb(229 231 235)"
+                          highlightColor="rgb(209 213 219)"
+                        ></Skeleton>
+                      </div>
+                      <div className="w-[45%] h-3 pl-4 mt-4">
+                        <Skeleton
+                          width={"100%"}
+                          height={"100%"}
+                          baseColor="rgb(229 231 235)"
+                          highlightColor="rgb(209 213 219)"
+                        ></Skeleton>
+                      </div>
                     </div>
-
-                    <div class="flex items-center justify-between w-full">
-                      <p class="text-base leading-4 text-gray-800">Shipping</p>
-
-                      <p class="text-base leading-4 text-gray-600">Rs.100</p>
-                    </div>
-                  </div>
+                  )}
 
                   <div class="flex items-center justify-between w-full">
                     <p class="text-base font-semibold leading-4 text-gray-800">
                       Total
                     </p>
 
-                    <p class="text-base font-semibold leading-4 text-gray-600">
-                      Rs.700
-                    </p>
+                    {!loading && (
+                      <p class="text-base font-semibold leading-4 text-gray-600">
+                        Rs.700
+                      </p>
+                    )}
+                    {loading && (
+                      <div className="w-[15%] h-5 ">
+                        <Skeleton
+                          width={"100%"}
+                          height={"100%"}
+                          baseColor="rgb(229 231 235)"
+                          highlightColor="rgb(209 213 219)"
+                        ></Skeleton>
+                      </div>
+                    )}
                   </div>
                 </div>
 
@@ -151,45 +350,99 @@ function OrderSummary() {
                         <p class="text-lg font-semibold leading-6 text-gray-800">
                           Delivery
                           <br></br>
-                          <span class="text-sm font-normal">
-                            Delivery with 24 Hours
-                          </span>
+                          {!loading && (
+                            <span class="text-sm font-normal">
+                              Delivery with 24 Hours
+                            </span>
+                          )}
+                          {loading && (
+                            <div className="w-28 h-3">
+                              <Skeleton
+                                width={"100%"}
+                                height={"100%"}
+                                baseColor="rgb(229 231 235)"
+                                highlightColor="rgb(209 213 219)"
+                              ></Skeleton>
+                            </div>
+                          )}
                         </p>
                       </div>
                     </div>
 
-                    <p class="text-lg font-semibold leading-6 text-gray-800">
-                      Rs.50
-                    </p>
+                    {!loading && (
+                      <p class="text-lg font-semibold leading-6 text-gray-800">
+                        Rs.50
+                      </p>
+                    )}
                   </div>
                   <div>
                     <p class="mb-2 text-xl font-semibold text-gray-700">
                       Shipping to
                     </p>
-                    <p class=" text-gray-700">
-                      Ramnagar, Agartala, Tripura, 799002{" "}
-                    </p>
+                    {!loading && (
+                      <p class=" text-gray-700">
+                        Ramnagar, Agartala, Tripura, 799002{" "}
+                      </p>
+                    )}
+                    {loading && (
+                      <div>
+                        <div className="w-[85%] h-4 pl-4 ">
+                          <Skeleton
+                            width={"100%"}
+                            height={"100%"}
+                            baseColor="rgb(229 231 235)"
+                            highlightColor="rgb(209 213 219)"
+                          ></Skeleton>
+                        </div>
+                        <div className="w-[75%] h-3 pl-4 mt-4">
+                          <Skeleton
+                            width={"100%"}
+                            height={"100%"}
+                            baseColor="rgb(229 231 235)"
+                            highlightColor="rgb(209 213 219)"
+                          ></Skeleton>
+                        </div>
+                        <div className="w-[45%] h-3 pl-4 mt-4">
+                          <Skeleton
+                            width={"100%"}
+                            height={"100%"}
+                            baseColor="rgb(229 231 235)"
+                            highlightColor="rgb(209 213 219)"
+                          ></Skeleton>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
             </div>
 
-            <a
-              href="#"
-              class=" flex-col  inline-flex items-center  justify-center text-sm font-medium text-gray-400"
+            <div
+              className={`flex-col  inline-flex items-center  justify-center text-sm font-medium text-gray-400 ${
+                loading == false ? " block" : " hidden"
+              }`}
             >
               <div class="text-center text-gray-400">
-                we have sent an email to abc@gmail.com with the order details.
+                we have sent an email to abc@gmail.com with the
+                <a href="#" className="text-green-600">
+                  {" "}
+                  order details
+                </a>
                 <br></br>
               </div>
               <div class="text-center text-gray-400">
-                You can cancel this order within 48 hours.<br></br>
+                You can cancel this order within 48 hours.
+                <a href="#" className="text-green-600">
+                  {" "}
+                  Know More
+                </a>
+                <br></br>
               </div>
-            </a>
+            </div>
 
             <div class="flex flex-wrap items-center justify-end gap-4 px-4 mt-6">
               <button
-                class="w-full px-4 py-2 bg-green-600 text-white rounded-md md:w-auto"
+                class={`w-full px-4 py-2 bg-green-600 text-white rounded-md md:w-auto`}
                 onClick={homeNavigateHandler}
               >
                 Continue shopping
