@@ -1,33 +1,61 @@
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const dotenv = require("dotenv");
+
+dotenv.config({ path: "./.env" });
+
+// access config var
+process.env.TOKEN_SECRET;
+
 const userModel = require("../models/user.model.js");
 
-const getusers = async (req, res) => {
+const authenticate = async (req, res) => {
   try {
-    const users = await userModel.find({});
-    res.status(200).json(users);
-  } catch (errors) {
-    res.status(500).json({ message: errors.message });
-  }
-};
+    const { phone, password } = req.body;
+    const user = await userModel.findOne({
+      phone: phone,
+    });
 
-const getuser = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const user = await userModel.findById(id);
-    res.status(200).json(user);
+    const phoneNumber = user.phone;
+    const token = jwt.sign({ user: phoneNumber }, process.env.TOKEN_SECRET);
+    console.log(token);
+
+    if (await bcrypt.compare(password, user.password)) {
+      res.json({ accessToken: token });
+      res.status(200);
+    } else {
+      res.status(401).json("unauthorized");
+    }
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
+//create user--------------------------------
 const createuser = async (req, res) => {
   try {
-    const user = await userModel.create(req.body);
-    res.status(200).json(user);
+    const hashedPasword = await bcrypt.hash(req.body.password, 10);
+    const userInfo = {
+      name: req.body.name,
+      phone: req.body.phone,
+      email: req.body.email,
+      password: hashedPasword,
+    };
+
+    if ((await userModel.findOne({ phone: req.body.phone })) != null) {
+      console.log("user already exist");
+      res.status(409).json("User Already Registered");
+    } else {
+      await userModel.create(userInfo);
+      console.log("user created");
+      res.status(200).json("successfully registered");
+    }
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
+//TO-D0: protected functions ------------------------
 const deleteuser = async (req, res) => {
   try {
     const { id } = req.params;
@@ -56,8 +84,7 @@ const updateuser = async (req, res) => {
 };
 
 module.exports = {
-  getusers,
-  getuser,
+  authenticate,
   createuser,
   deleteuser,
   updateuser,

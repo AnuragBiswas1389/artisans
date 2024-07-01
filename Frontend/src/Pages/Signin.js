@@ -14,7 +14,6 @@ function Signin() {
     event.preventDefault();
     setLoginError(false);
     if (getMail && getPassword) {
-      console.log(getMail, getPassword);
       setValidity(true);
     } else {
       setValidity(false);
@@ -25,11 +24,9 @@ function Signin() {
       phone: event.target.phone.value,
     };
 
-    console.log(jsonData);
-
     try {
       setProgress(true);
-      const response = await fetch("http://localhosdt:8000/api/users", {
+      fetch("http://localhost:8000/api/users/authenticate", {
         method: "POST",
         mode: "cors",
         headers: {
@@ -37,12 +34,20 @@ function Signin() {
           // 'Content-Type': 'application/x-www-form-urlencoded',
         },
         body: JSON.stringify(jsonData), // body data type must match "Content-Type" header
+      }).then(async (response) => {
+        console.log(response.status);
+        if (!(response.status === 200)) {
+          setLoginError(true);
+          setProgress(false);
+        }
+        if (response.status === 200) {
+          navigate("/");
+          setProgress(false);
+          const token = await response.json();
+          console.log(token);
+          document.cookie = `token=${token.accessToken}`;
+        }
       });
-
-      const result = await response.json();
-      console.log("Success:", result);
-      navigate("/");
-      setLoin(true);
     } catch (error) {
       console.log("error: ", error);
       setLoginError(true);

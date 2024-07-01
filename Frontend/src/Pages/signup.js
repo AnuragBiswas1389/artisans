@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import loginModal from "../components/Modal/loginModal";
 
 function Signup() {
   const [passCorrect, setPassState] = useState(true);
-  const [login, setLoin] = useState(false);
+  const [alreadyExist, setAlreadyExist] = useState(false);
   const [loginError, setLoginError] = useState(false);
   const [progress, setProgress] = useState(false);
   const navigate = useNavigate();
@@ -12,9 +11,12 @@ function Signup() {
   async function handelSignup(event) {
     event.preventDefault();
     setLoginError(false);
+    setPassState(true);
+
     if (!(event.target.password1.value === event.target.password2.value)) {
       console.log("password not match");
       setPassState(false);
+      return;
     }
 
     var jsonData = {
@@ -28,7 +30,8 @@ function Signup() {
 
     try {
       setProgress(true);
-      const response = await fetch("http://localhost:8000/api/users", {
+      setAlreadyExist(false);
+      await fetch("http://localhost:8000/api/users", {
         method: "POST",
         mode: "cors",
         headers: {
@@ -36,12 +39,18 @@ function Signup() {
           // 'Content-Type': 'application/x-www-form-urlencoded',
         },
         body: JSON.stringify(jsonData), // body data type must match "Content-Type" header
-      });
+      }).then((response) => {
+        console.log(response.status);
 
-      const result = await response.json();
-      console.log("Success:", result);
-      navigate("/");
-      setLoin(true);
+        if (response.status === 200) {
+          navigate("/");
+          setProgress(false);
+        }
+        if (response.status === 409) {
+          setAlreadyExist(true);
+          setProgress(false);
+        }
+      });
     } catch (error) {
       console.log("error: ", error);
       setLoginError(true);
@@ -59,6 +68,11 @@ function Signup() {
       {loginError && (
         <div className="z-10 w-100 h-100 bg-green-600 p-2 text-white font-bold bg-blend-normal">
           There was an Error, Please Check Your Password !
+        </div>
+      )}
+      {alreadyExist && (
+        <div className="z-10 w-100 h-100 bg-green-600 p-2 text-white font-bold bg-blend-normal">
+          User Already Registered, Please Login !
         </div>
       )}
       <div className={`bg-gray-100 flex items-center justify-center h-screen `}>
